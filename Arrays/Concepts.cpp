@@ -73,15 +73,13 @@ int main(){
 int arr[] = {1,2,3,4,5,6,7,8,9} ; 
     //array itself is a pointer
     // int *arr = {1,2,3,4,5,6,7,8,9} ; the both lines are same; 
-    
-    int *ptr = arr ; 
-    cout<<ptr[0]<<endl;
-    *(ptr+1) = 100;
-    cout<<*arr<<endl;
-    cout<<*(arr+1)<<endl;
-    cout<<arr[1]<<endl;
-    
-    cout<<"vectors"<<endl;
+    int *ptr = arr ; 
+     cout<<ptr[0]<<endl;
+     *(ptr+1) = 100;
+      cout<<*arr<<endl;
+      cout<<*(arr+1)<<endl;
+       cout<<arr[1]<<endl;
+    cout<<"vectors"<<endl;
     /*
     vectors := it is a enhanced version of arrays. 
     it's size is changable at runtime. 
@@ -98,81 +96,70 @@ int arr[] = {1,2,3,4,5,6,7,8,9} ;
     // remove the front element => v.pop_front(); time complexity o(n);
     // remove an element at an index =>
 
-se(iterator or index) ; 
+    set(iterator or index) ; 
     // auto it = v.begin() , it = v.end(); v.erase(v.beging()+2);  it will erase the third element; 
-    
     // it has sort function; 
     // sort(v.begin(),v.end()); the two paramenters are the starting range including , and the last range excluding. 
-    // reverse(v.begin(),v.end()) ; reverse the array with in the given range. 
-    
-    
-    vector<pair<int,int>> v = {{1,2},{1,0},{5,100},{2,10} , {5,50} , {1,-2}};
+    // reverse(v.begin(),v.end()) ; reverse the array with in the given range.  
+    vector<pair<int,int>> v = {{1,2},{1,0},{5,100},{2,10} , {5,50} , {1,-2}};
     // sort the above array with respctive of first element , if the first element is same then it shold be in decending order with respctive to second element
-    auto cmp = & {
-        if(a.first == b.first) {
-            return a.second > b.second;
-        }
-        return a.first < b.first ;
-    };
-    sort(v.begin(),v.end(),cmp);
-    for(auto &x: v){
-        cout<<x.first<<" "<<x.second<<endl;
-    }
-    
-    vector<int> v1 = {1,2,1,3,4,1,6,6,2,3,3,3,5,7,8,1,7,8,8};
+    auto cmp = & {
+     if(a.first == b.first) {
+         return a.second > b.second;
+        }
+         return a.first < b.first ;
+    };
+     sort(v.begin(),v.end(),cmp);
+     for(auto &x: v){
+    cout<<x.first<<" "<<x.second<<endl;
+     }
+
+     vector<int> v1 = {1,2,1,3,4,1,6,6,2,3,3,3,5,7,8,1,7,8,8};
     // sort the elements in such a way that the element which is repeated more should appear at the first; 
-    unordered_map<int,int> m;
-    for(auto &x: v1) m[x]++;
-    
-    auto cmp2 = &{
-        if(m[a] == m[b]){
-            return a<b;
-        }
-        return m[a]>m[b];
-    };
-    
-    sort(v1.begin(),v1.end(),cmp2);
-    
-    for(auto &x:v1) cout<<x<<' ';
-    cout<<endl;
-    
-   
-   
+     unordered_map<int,int> m;
+     for(auto &x: v1) m[x]++;
+     auto cmp2 = &{
+     if(m[a] == m[b]){
+     return a<b;
+     }
+    return m[a]>m[b];
+    };
+    sort(v1.begin(),v1.end(),cmp2);
+     for(auto &x:v1) cout<<x<<' ';
+     cout<<endl;
 //accumulate: for finding sum of elements in array we written it as accumulate(arr.begin(),arr.end(),0);
     /*
     unordered_set : = it is a data strucutes which will store a single occurence of a data no matter how many times it got repeated. 
     in orderede set, we can tell if one element is present in a set or not, we can insert an element, deleate an element and tell the existance of an element. 
     time complexity o(1);
     */
-    
-    unordered_set unSet ; 
-    unSet.insert(1); 
-    unSet.insert(2);
-    unSet.insert(3); 
-    unSet.insert(1);
-    unSet.insert(1);
-    unSet.insert(2);
-    cout<<"unrodered set"<<endl;
-    for(auto &x: unSet) {
-        cout<<x<<",";
-    }
-    cout<<endl;
+    unordered_set unSet ; 
+     unSet.insert(1); 
+      unSet.insert(2);
+    unSet.insert(3); 
+    unSet.insert(1);
+    unSet.insert(1);
+    unSet.insert(2);
+    cout<<"unrodered set"<<endl;
+     for(auto &x: unSet) {
+     cout<<x<<",";
+    }
+     cout<<endl;
     // to find an element; 
-    auto it = unSet.find(1);
-    if(it == unSet.end()){
+    auto it = unSet.find(1);
+    if(it == unSet.end()){
         // element does not exist 
-        cout<<"element does not exists"<<endl;
-    }else {
-        unSet.erase(it) ;  // s.erase(1) also works , if 1 exists it will erase or it will leave. 
-        cout<<"removed an element from the set"<<endl;
-    }
-    
+     cout<<"element does not exists"<<endl;
+    }else {
+     unSet.erase(it) ;  // s.erase(1) also works , if 1 exists it will erase or it will leave. 
+     cout<<"removed an element from the set"<<endl;
+     }
+    
     /*
         It is same for set data strucure but the difference is the data is stored in a sorted format , 
         auto it = s.begin() , will point to smallest eleemnt; 
         it++ , will give the next smallest element in the set.
         time complexity for every operation is log(n) since it is maintaining order. 
     */
-    
     /*
         map is a data strucure which will store the data in key value pair, here the value we store must be related to key ,so that in time of needed
