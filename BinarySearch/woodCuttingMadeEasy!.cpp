@@ -54,27 +54,26 @@ Output 2:
 
  36
 */
-int Solution::solve(vector<int> &arr, int k) {
+int Solution::solve(vector<int> &arr, int B) {
     int n=arr.size();
-    int mxHeight=*max_element(arr.begin(),arr.end());
-    int l=0, r=mxHeight;
-    int res=0;
-    while(l<=r){
-        int mid=(l+r)/2;
-        long long int ct=0;
+    int bottom=0, mxHeight=*max_element(arr.begin(),arr.end());
+    int reqHeight=INT_MIN;
+    while(bottom<=mxHeight){
+        int mid=(bottom+mxHeight)/2;
+        long long int sum=0;
         int i=0;
         while(i<n){
-            if((arr[i]-mid)>0){
-                ct+=(arr[i]-mid);
+            if(arr[i]>mid){
+                sum+=arr[i]-mid;
             }
             i++;
         }
-        if(ct>=k){
-            res=mid;
-            l=mid+1;
+        if(sum>=B){
+            reqHeight=mid;
+            bottom=mid+1;
         }else{
-            r=mid-1;
+            mxHeight=mid-1;
         }
     }
-    return res;
+    return reqHeight;
 }

@@ -43,15 +43,26 @@ Output 2:
 */
 
 int Solution::solve(vector<int> &arr) {
-    int mx=INT_MIN;
-    int mn=INT_MAX;
-    for(int i=0; i<arr.size(); i++){
-        if(arr[i]>mx){
-            mx=max(mx,arr[i]);
-        }
-        if(arr[i]<mn){
-            mn=min(mn,arr[i]);
-        }
+    // int n=arr.size();
+    // int maxElement=INT_MIN;
+    // int minElement=INT_MAX;
+    // for(int i=0; i<n; i++){
+    //     if(arr[i]>maxElement){
+    //         maxElement=arr[i];
+    //     }
+    //     if(arr[i]<minElement){
+    //         minElement=arr[i];
+    //     }
+    // }
+    // return maxElement+minElement;
+    int n=arr.size();
+    int maxElement=INT_MIN;
+    int minElement=INT_MAX;
+    for(int i=0; i<n; i++){
+        maxElement=max(maxElement,arr[i]);
+        minElement=min(minElement,arr[i]);
     }
-    return mx+mn;
+    return maxElement+minElement;
+    
+    
 }

@@ -64,42 +64,35 @@ Output 2:
 0
 
 */
-int Solution::searchMatrix(vector<vector<int> > &arr, int x) {
-    //Approach-1 ->time complexity is O(n)+log(m)
-    int n=arr.size();
-    bool flag=0;
+int Solution::searchMatrix(vector<vector<int> > &arr, int k) {
+    //approach-1: it takes O(n*m) time complexity and O(1)space complexity
+    int n=arr.size(),m=arr[0].size();
+    int ans=0;
     for(int i=0; i<n; i++){
-        int l=0,r=arr[0].size();
-        while(l<=r){
-            int mid=(l+r)/2;
-            if(arr[i][mid]==x){
-                flag=1;
+        for(int j=0; j<m; j++){
+            if(arr[i][j]==k){
+                ans=1;
                 break;
-            }else if(arr[i][mid]>x){
-                r=mid-1;
-            }else{
-                l=mid+1;
             }
         }
     }
-    return flag;
-    
-    /*
-    AppSroach-2 ->
-    imagine 2D matrix as 1D as proceed below and time complextiy is O(log(n*m))base 2;
-}
-    */
-    
-    int l=0,n=arr.size(),m=arr[0].size(),r = n*m-1;
-    while(l<=r){
-        int mid=(l+r)/2;
-        int row=mid/m, col=mid%m;
-        if(arr[row][col]==x) return 1;
-        else if( arr[row][col]>x){
-            r=mid-1;
-        }else{
-            l=mid+1;
+    return ans;
+    //approch-2: it takes O(n*log(m))time complexity
+    int n=arr.size(), m=arr[0].size();
+    int ans=0;
+    for(int i=0; i<n; i++){
+        int l=0, r=m-1;
+        while(l<=r){
+            int mid=(l+r)/2;
+            if(arr[i][mid]==k){
+                ans=1;
+                break;
+            }else if(arr[i][mid]<k){
+                l=mid+1;
+            }else{
+                r=mid-1;
+            }
         }
     }
-    return 0;
+    return ans;
 }

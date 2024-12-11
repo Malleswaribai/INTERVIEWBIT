@@ -54,24 +54,55 @@ Output 2:
 
 */
 
-#include <bits/stdc++.h>
-int Solution::solve(vector<int> &arr, int B) {
-    int mx=INT_MIN;
+int Solution::solve(vector<int> &arr, int k) {
+    //approach-1: it is brute force , which takes O(1)space complexity and O(n*n)time complexity
+    
     int n=arr.size();
-    int sum=accumulate(arr.begin(),arr.end(),0);
-    if(n<=B){
-        return sum;
-    }
-    int i=0, j=n-B-1;
-    int winSum=accumulate(arr.begin()+i,arr.begin()+j+1,0);
-    while(j<n){
-        mx=max(mx,sum-winSum);
-        if(j<n-1){
-            winSum+=arr[j+1];
+    int maxSum=INT_MIN;
+    int first=0;
+    while(first<=k){
+        int leftSum=0, rightSum=0;
+        for(int i=0; i<first; i++){
+            leftSum+=arr[i];
         }
-        winSum-=arr[i];
-        i++;
-        j++;
+        int last=k-first;
+        for(int i=n-last; i<n; i++){
+            rightSum+=arr[i];
+        }
+        int sum=leftSum+rightSum;
+        maxSum=max(maxSum,sum);
+        first++;
     }
-    return mx;
-}
+    return maxSum;
+    // appraoch-2: it is optimized approach which takes O(n) spacce complexity and O(n)time complexity
+    vector<int>prefix;
+    vector<int>suffix;
+    int n=arr.size();
+    prefix.push_back(arr[0]);
+    int prefixSum=arr[0];
+    for(int i=1; i<n; i++){
+        int x=prefixSum+arr[i];
+        prefix.push_back(x);
+        prefixSum=x;
+    }
+    suffix.push_back(arr[n-1]);
+    int suffixSum=arr[n-1];
+    for(int i=n-2; i>=0; i--){
+        int x=suffixSum+arr[i];
+        suffix.push_back(x);
+        suffixSum=x;
+    }
+    reverse(suffix.begin(),suffix.end());
+    int mxSum=INT_MIN;
+    int first=0;
+    while(first<=k){
+        int leftSum=0, rightSum=0;
+        leftSum=prefix[first-1];
+        int last=k-first;
+        rightSum=suffix[n-last];
+        int sum=leftSum+rightSum;
+        mxSum=max(mxSum,sum);
+        first++;
+    }
+    return mxSum;
+} 

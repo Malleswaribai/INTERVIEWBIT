@@ -33,23 +33,43 @@ Ouput 2:
 */
 
 vector<int> Solution::solve(vector<int> &arr) {
-    // Approach -1 -> it a brute force takes three traversal of array
+    //approach-1: it is a bruteforce takes 3 traversal of array
     int n=arr.size();
-    vector<int>res(n);
-    int count=0;
-    for(int auto &x:arr){
-        if(x==0){
-            count++;
+    vector<int>zeros;
+    vector<int>ones;
+    for(int i=0; i<n; i++){
+        if(arr[i]==0){
+            zeros.push_back(0);
+        }else{
+            ones.push_back(1);
         }
     }
-    for(int i=0; i<c; i++){
-        res.push_back(0);
+    vector<int>res;
+    for(auto x:zeros){
+        res.push_back(x);
     }
-    for(int i=c-1; i<n; i++){
-        res.push_back(1);
+    for(auto x:ones){
+        res.push_back(x);
     }
     return res;
-    //Approach-2 -> it a optimized approach we will traverse at only once in an array. by keeping index of 0s updated.
+    //approach-2: it is just sorting an array
+    sort(arr.begin(),arr.end());
+    return arr;
+    // Approach -3 -> it a brute force takes three traversal of array
+    int n=arr.size();
+    int zeroCount=0;
+    for(int auto &x:arr){
+        if(x==0){
+            zeroCount++;
+        }
+    }
+    int oneCount=n-zeroCount;
+    for(int i=0; i<n; i++){
+        if(i<zeroCount) arr[i]=0;
+        else arr[i]=1;
+    }
+    return arr;
+    //Approach-4 -> it a optimized approach we will traverse at only once in an array. by keeping index of 0s updated.
     int n=arr.size();
     int ZeroCount=0;
     for(int i=0; i<n; i++){

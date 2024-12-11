@@ -62,27 +62,42 @@ Example Output
  * };
  */
 ListNode* Solution::removeNthFromEnd(ListNode* head, int k) {
-    int n = 0;
-    auto cur = head;
-    while (cur) {
+  /**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+ListNode* Solution::removeNthFromEnd(ListNode* head, int B) {
+    if(head==NULL && head->next==NULL) return NULL;
+    int n;
+    auto cur=head;
+    while(cur){
         n++;
-        cur = cur->next;
+        cur=cur->next;
     }
-
-    int m = n - k;
-    if (k > n || k == n) {
-        ListNode* temp = head;
-        head = head->next;
-        delete temp; 
+    if(B==n || B>n){
+        auto temp=head;
+        head=head->next;
+        free(temp);
         return head;
     }
-    auto cur1 = head;
-    for (int i = 0; i < m - 1; i++) {
-        cur1 = cur1->next;
+    int ct=0;
+    int ind=n-B;
+     cur=head;
+    while(cur && cur->next){
+        ct++;
+        if(ct==ind){
+            break;
+        }else{
+            cur=cur->next;
+        }
     }
-    ListNode* temp = cur1->next;
-    cur1->next = cur1->next->next;
-    delete temp;  
-    
+    ListNode *temp=cur->next;
+    cur->next=temp->next;
+    free(temp);
     return head;
+
 }

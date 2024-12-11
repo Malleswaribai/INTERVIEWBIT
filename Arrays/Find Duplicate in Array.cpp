@@ -40,14 +40,26 @@ Output 3:
 */
 int Solution::repeatedNumber(const vector<int> &arr) {
     int n=arr.size();
-    unordered_set<int>s;
+    //approach-1: it is a bruteforce it takes constant space and O(n*n)time complexity.and which gives TLE
+    for(int i=0; i<n; i++){
+        int x=arr[i];
+        for(int j=i+1; j<n; j++){
+            if(x==arr[j]){
+               return x; 
+            }
+        }
+    }
+    return -1;
+    //approach-2: it is quite optimized approach it takes O(n) space complexity and O(n) time complexity.
+    set<int>s;
     for(int i=0; i<n; i++){
         auto it=s.find(arr[i]);
-        if(it!=s.end()){
-            return arr[i];
-        }else{
+        if(it==s.end()){
             s.insert(arr[i]);
+        }else{
+            return arr[i];
         }
     }
     return -1;
 }
+

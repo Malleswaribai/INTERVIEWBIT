@@ -35,25 +35,24 @@ Example Output
 
 */
 
-vector<vector<int> > Solution::solve(int rows) {
-    if(rows==0) return { };
-    int n=1;
+vector<vector<int> > Solution::solve(int n) {
+    //here where n is the number of rows
+    if(n==0) return {};
     vector<vector<int>>res;
-    vector<int>prev(n,1);
+    vector<int>prev;
+    prev.push_back(1);
     res.push_back(prev);
-    n++;
-    while(rows>1){
+    n--;
+    while(n>=1){
+        n--;
         vector<int>temp;
-        temp.push_back(1);
-        for(int i=0; i<n-2; i++){
-            int x=prev[i+1]+prev[i];
+        for(int i=0; i<prev.size(); i++){
+            int x=prev[i]+prev[i-1];
             temp.push_back(x);
         }
         temp.push_back(1);
-        prev=temp;
         res.push_back(temp);
-        n++;
-        rows--;
+        prev=temp;
     }
     return res;
 }

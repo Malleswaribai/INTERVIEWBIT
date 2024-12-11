@@ -38,23 +38,26 @@ Output 2:
     6
 */
 int Solution::evalRPN(vector<string> &s) {
-    stack<int>st;
     int n=s.size();
+    if(n==1) return stoi(s[0]);
+    stack<int>st;
+    int res=0;
     for(int i=0; i<n; i++){
-        if((s[i]=="+") || (s[i]=="-") || (s[i]=="*") || (s[i]=="/")){
-            int operand1=st.top();
+        if(s[i]=="+" || s[i]=="-" || s[i]=="*" || s[i]=="%" || s[i]=="/"){
+            int x=st.top();
             st.pop();
-            int operand2=st.top();
+            int y=st.top();
             st.pop();
-            int val;
-            if(s[i]=="+") val=operand1+operand2;
-            if(s[i]=="-") val=operand2-operand1;
-            if(s[i]=="*") val=operand2*operand1;
-            if(s[i]=="/") val=operand2/operand1;
-            st.push(val);
+            if(s[i]=="+") res=x+y;
+            if(s[i]=="-") res=y-x;
+            if(s[i]=="*") res=y*x;
+            if(s[i]=="/") res=y/x;
+            if(s[i]=="%") res=y%x;
+            st.push(res);
         }else{
             st.push(stoi(s[i]));
         }
     }
-    return st.top();
+    return res;
 }
+

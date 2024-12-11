@@ -36,27 +36,30 @@ Output 2:
 
 */
 int Solution::isPalindrome(string s) {
-    string str;
-    int n=s.size();
-    int i=0;
-    while(i<n){
-    //    if((s[i]<='z'&& s[i]>='a') || (s[i]<='Z' && s[i]>='A')){
-    //        str.push_back(s[i]);
-    //    }
-    //    i++;
-    if (isalnum(s[i])) {
-            str.push_back(tolower(s[i])); // Convert to lowercase
+    string s1;
+    // for(int i=0; i<s1.size(); i++){
+    //     if((s[i]<='z' && s[i]>='a') || (s[i]<='Z' && s[i]>='A') || (s[i]<='9' && s[i]>='0')){
+    //         if(s[i]<='Z' && s[i]>='A' ){
+    //             s[i]=((char)(s[i]+32));
+    //         }
+    //         s1.push_back(s[i]);
+    //     }
+    // }
+    for(int i=0; i<s.size(); i++){
+        if(isalnum(s[i])){
+            s1.push_back(tolower(s[i]));
         }
-        i++;
     }
-    int m=str.size();
-    int left=0, right=m-1;
-    while(left<right){
-        if(str[left]!=str[right]){
+    int n=s1.size();
+    int i=0, j=n-1;
+    while(i<=j){
+        if(s1[i]==s1[j]){
+            i++;
+            j--;
+        }else{
             return 0;
         }
-        left++;
-        right--;
+        
     }
     return 1;
 }

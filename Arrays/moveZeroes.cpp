@@ -37,31 +37,29 @@ Ouput 2:
 
 */
 vector<int> Solution::solve(vector<int> &arr) {
-    //->Approach -1
-    int n=arr.size();
-    int nonZeroInd=0;
+       int n=arr.size();
+    //approach-1: it is brute force we are making the copy of the given array and using space
+    vector<int>v;
+    int zeroCount=0;
+    for(int i=0; i<n; i++){
+        if(arr[i]==0){
+            zeroCount++;
+        }else{
+            v.push_back(arr[i]);
+        }
+    }
+    while(zeroCount>0){
+        v.push_back(0);
+        zeroCount--;
+    }
+    return v;
+    //approach-2: it is optimized approach where we are doing it in place without making copy of the array and here we are keeping nonzeroelement index updated.
+    int nonZeroIndex=0;
     for(int i=0; i<n; i++){
         if(arr[i]>0){
-            swap(arr[i],arr[nonZeroInd]);
-            nonZeroInd++;
+            swap(arr[i],arr[nonZeroIndex]);
+            nonZeroIndex++;
         }
     }
     return arr;
-
-    //->Approach-2
-    vector<int>res;
-    int ZeroCount=0;
-    for(int i=0; i<arr.size(); i++){
-        if(arr[i]>0){
-            res.push_back(arr[i]);
-        }else{
-            ZeroCount++;
-        }
-        
-    }
-    while(ZeroCount>0){
-        res.push_back(0);
-        ZeroCount--;
-    }
-    return res;
 }

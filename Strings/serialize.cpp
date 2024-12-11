@@ -42,6 +42,7 @@ interviewbit12~
 
 */
 string Solution::serialize(vector<string> &arr) {
+     //approach-1: it takes O(n) space and time complexity.
     int n=arr.size();
     string res;
     for(int i=0; i<n; i++){

@@ -47,16 +47,26 @@ Output 2:
  3
 */
 int Solution::sqrt(int n) {
+    //approach-1: it takes O(n)time complexity
+    long long int ans=0;
+    for(int i=1; i<=n; i++){
+        long long int x=i*i;
+        if(x<=n){
+            ans=i;
+        }
+    }
+    return ans;
+    //approach-1: it is optimized approach takes O(long) time compleixty using binary search.
+    int ans=0;
     int l=1, r=n;
-    int res=0;
     while(l<=r){
         int mid= (r-l)/2 + l;
-        if(mid*1ll*mid>n){
+        if(mid*1LL*mid>n){
             r=mid-1;
         }else{
-            res=mid;
+            ans=mid;
             l=mid+1;
         }
     }
-    return res;
+    return ans;
 }

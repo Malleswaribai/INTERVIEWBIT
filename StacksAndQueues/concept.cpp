@@ -23,6 +23,7 @@
     cout<<q.front()<<endl;
     q.pop();
     cout<<q.size()<<endl; 
+    cout<<q.first();
     
 
 */

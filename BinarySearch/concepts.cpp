@@ -1,5 +1,5 @@
 /*
-    Binary search : It is a searching algorithm which can be performed over baised data or else ordered data.
+    Binary search : It is a searching algorithm which can be performed over biased data or else ordered data.
     to apply binary search on any list of elements, when we have given a pirticular element from that list
     we should be able to tell behaviour of the elements to its right side and left. 
 

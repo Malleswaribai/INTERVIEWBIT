@@ -42,26 +42,17 @@ Output 2:
 */
 
 int Solution::permuteStrings(string A, string B) {
-    vector<char>v;
-    vector<char>v1;
-    int n=A.size(), m=B.size();
-    int i=0, j=0;
-    while(i<n){
-        v.push_back(A[i]);
+    sort(A.begin(),A.end());
+    sort(B.begin(),B.end());
+    int n1=A.size();
+    int n2=B.size();
+    int i=0;
+    int ans=1;
+    while(i<n1 && i<n2){
+        if(A[i]!=B[i]){
+            ans=0;
+        }
         i++;
     }
-     while(j<m){
-        v1.push_back(B[j]);
-        j++;
-    }
-    sort(v.begin(),v.end());
-    sort(v1.begin(),v1.end());
-    int k=0;
-    while(k<n && k<m){
-        if(v[k]!=v1[k]){
-            return 0;
-        }
-        k++;
-    }
-    return 1;
+    return ans;
 }
