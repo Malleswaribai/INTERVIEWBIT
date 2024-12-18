@@ -52,25 +52,13 @@ Example Output
  * };
  */
 ListNode* Solution::swapPairs(ListNode* head) {
-    //here i swaped values
-    auto cur=head;
-    auto cur1=head->next;
-    while(cur && cur1){
-        auto x=cur->val;
-        cur->val=cur1->val;
-        cur1->val=x;
-        if(cur->next==NULL){
-             cur=NULL;
-             break;
-        }
-        if(cur1->next==NULL){
-            cur1=NULL;
-            break;
-        }
-        cur=cur->next->next;
-        cur1=cur1->next->next;
-    }
-    return head;
+    //
+     if (!head || !head->next) return head;
+    ListNode* first = head;
+    ListNode* second = head->next;
+    first->next = swapPairs(second->next);
+    second->next = first;
+    return second;
     
     
     

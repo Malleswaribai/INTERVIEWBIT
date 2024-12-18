@@ -36,33 +36,84 @@ Example Output
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
-ListNode* Solution::rotateRight(ListNode* head, int k) {
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+ListNode* Solution::rotateRight(ListNode* head, int B) {
+    //approach-1: it is giving memory limit exceeded error because of used of space
+    if(head==NULL) return NULL;
     auto cur=head;
-    vector<ListNode*>v;
+    vector<int>v;
     while(cur){
-        v.push_back(cur);
+        v.push_back(cur->val);
         cur=cur->next;
     }
+    vector<int>rotated;
     int n=v.size();
-    vector<ListNode*>res;
-    int i=n-1;
-    k=k%n;  // here it will give how many times it should rotate the list
-    while(k>0){
-        res.push_back(v[i]);
-        i--;
-        k--;
+    if(B>n){
+        rotated.push_back(v[n-1]);
+         int i=0;
+        while(i<n-1){
+            rotated.push_back(v[n-1]);
+        }
+    }else{
+            int ind=n-B;
+        int i=ind;
+        while(i<n){
+            rotated.push_back(v[i]);
+            i++;
+        }
+        i=0;
+        while(i<ind){
+            rotated.push_back(v[i]);
+            i++;
+        }
+    }  
+    ListNode *Head=NULL;
+    ListNode *last=NULL;
+    for(int i=0; i<rotated.size(); i++){
+        ListNode *temp= new ListNode(rotated[i]);
+        if(Head==NULL){
+            Head=temp;
+            last=temp;
+        }else{
+            last->next=temp;
+            last=temp;
+        }
     }
-    reverse(res.begin(),res.end());
-    int m=n-k;
-    for(int j=0; j<m; j++){
-        res.push_back(v[j]);
+    return Head;
+    //
+    if(head==NULL) return NULL;
+    int n=0;
+    auto cur=head;
+    while(cur){
+        n++;
+        cur=cur->next;
     }
-    for(int i=0; i<res.size(); i++){
-        if(i==n-1){
-            res[i]->next=NULL;
+    B=B%n;
+    if(B==0) return head;
+    int rotatedIndex=n-B;
+    int ct=0;
+    cur=head;
+    while(cur){
+        ct++;
+        if(ct==rotatedIndex){
             break;
         }
-        res[i]->next=res[i+1];
+        cur=cur->next;
     }
-    return res[0];
+    ListNode *newHead=cur->next;
+    cur->next=NULL;
+    auto Cur=newHead;
+    while(Cur->next){
+        Cur=Cur->next;
+    }
+    Cur->next=head;
+    return newHead;
+    
 }
